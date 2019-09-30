@@ -41,7 +41,19 @@ class App extends React.Component {
         }
       })
     })
-  }
+  };
+
+  addTask = taskName => {
+    const newTask = {
+      task: taskName,
+      id: Date.now(),
+      completed: false
+    }
+    this.setState({
+      name: [...this.state.name, newTask]
+    });
+  };
+
   render() {
     return (
       <div>
@@ -50,7 +62,7 @@ class App extends React.Component {
           name={this.state.name}
           toggleItem={this.toggleItem}
         />
-        <TodoForm/>
+        <TodoForm addTask={this.addTask}/>
       </div>
     );
   }
