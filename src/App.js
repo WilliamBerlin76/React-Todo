@@ -59,6 +59,23 @@ class App extends React.Component {
       name: this.state.name.filter(item => !item.completed)
     });
   };
+  
+  componentDidMount(){
+    const storage = window.localStorage.getItem('name')
+    const parseName = JSON.parse(storage)
+    if (parseName){
+      this.setState({
+        name: parseName
+      })
+    }
+  }
+
+  componentDidUpdate(prevState){
+    if(prevState !== this.state){
+      const json = JSON.stringify(this.state.name)
+      window.localStorage.setItem('name', json)
+    }
+  }
 
   render() {
     return (
